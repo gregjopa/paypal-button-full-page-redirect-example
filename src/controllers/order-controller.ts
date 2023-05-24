@@ -116,7 +116,7 @@ async function createOrderHandler(
         experience_context: {
           user_action: "CONTINUE",
           return_url: `${request.protocol}://${request.hostname}/app/capture-checkout`,
-          cancel_url: `${request.protocol}://${request.hostname}/paypal-button-cancel.html`,
+          cancel_url: `${request.protocol}://${request.hostname}/app/cancel-checkout`,
         },
       },
     },

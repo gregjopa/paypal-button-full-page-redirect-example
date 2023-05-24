@@ -66,3 +66,27 @@ export async function completeCheckoutController(fastify: FastifyInstance) {
     },
   });
 }
+
+export async function cancelCheckoutController(fastify: FastifyInstance) {
+  fastify.route({
+    method: "GET",
+    url: "/cancel-checkout",
+    schema: {
+      querystring: {
+        type: "object",
+        required: ["token"],
+        properties: {
+          token: { type: "string" },
+        },
+      },
+    },
+    handler: async (req, reply) => {
+      const querystring = req.query as { token: string };
+      const orderDetails = await getOrder({ orderID: querystring.token });
+
+      return reply.view("/src/templates/cancel-checkout.ejs", {
+        orderDetails,
+      });
+    },
+  });
+}

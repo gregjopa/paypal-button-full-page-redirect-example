@@ -40,8 +40,8 @@ test('the "/api/paypal/create-order" route should successfully create an order',
       method: "POST",
       url: "/api/paypal/create-order",
       payload: {
-            id: "1blwyeo8",
-            quantity: 2,
+        id: "1blwyeo8",
+        quantity: 2,
       },
     });
     const responseBody = response.json();
