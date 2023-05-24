@@ -10,6 +10,7 @@ import {
   captureCheckoutController,
   completeCheckoutController,
   cancelCheckoutController,
+  homeRedirectController,
 } from "./controllers/app-controller";
 
 import { setErrorHandler } from "./controllers/error-controller";
@@ -24,4 +25,6 @@ export default async function router(fastify: FastifyInstance) {
   fastify.register(captureCheckoutController, { prefix: "/app" });
   fastify.register(completeCheckoutController, { prefix: "/app" });
   fastify.register(cancelCheckoutController, { prefix: "/app" });
+
+  fastify.register(homeRedirectController);
 }

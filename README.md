@@ -1,6 +1,6 @@
 # PayPal Button Full Page Redirect Example with v2 Orders API
 
-Node.js web server for testing a PayPal Button integration with the v2 Orders API. Built with the [Fastify web framework](https://www.fastify.io/).
+Node.js web server for testing a html-only PayPal Button integration with the v2 Orders API. Built with the [Fastify web framework](https://www.fastify.io/).
 
 ## Quick Start
 
@@ -15,5 +15,4 @@ npm install
 npm run dev
 ```
 
-Then go to http://localhost:3006/app/start-checkout
-
+Then go to http://localhost:3006/

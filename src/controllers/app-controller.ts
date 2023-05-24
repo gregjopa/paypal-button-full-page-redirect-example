@@ -90,3 +90,13 @@ export async function cancelCheckoutController(fastify: FastifyInstance) {
     },
   });
 }
+
+export async function homeRedirectController(fastify: FastifyInstance) {
+  fastify.route({
+    method: "GET",
+    url: "/",
+    handler: async (req, reply) => {
+      return reply.redirect("/app/start-checkout");
+    },
+  });
+}
