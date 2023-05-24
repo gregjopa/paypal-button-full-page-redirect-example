@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Start Checkout - PayPal Button Full Page Redirect Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Start Checkout</h1>
+  <p>PayPal Button Full Page Redirect Example</p>
+
+  <form action="/api/paypal/create-order" method="POST">
+    <input name="_csrf" type="hidden" value="<%= token %>">
+    <div>
+      <label for="id">Product</label>
+      <select name="id" id="id">
+        <% products.forEach(product => { %>
+          <option value="<%= product.id %>">
+            <%= product.name %> $<%= product.price %> <%= product.image %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
+    <div>
+      <label for="quantity">Quantity</label>
+      <input type="number" min="1" name="quantity" id="quantity" value="2">
+    </div>
+    <div>
+      <button>Pay with PayPal</button>
+    </div>
+  </form>
+</body>
+</html>

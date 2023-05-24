@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Capture Checkout - PayPal Button Full Page Redirect Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <h1>Capture Checkout</h1>
+  <p>PayPal Button Full Page Redirect Example</p>
+  <form action="/api/paypal/capture-order" method="POST">
+    <input name="_csrf" type="hidden" value="<%= token %>">
+    <input name="orderID" type="hidden" value="<%= orderDetails.data.id %>">
+    <div>
+      <button>Capture Order</button>
+    </div>
+  </form>
+  <pre>
+    <%= JSON.stringify(orderDetails, null, 4) %>
+  </pre>
+</body>
+</html>
