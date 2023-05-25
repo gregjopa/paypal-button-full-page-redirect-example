@@ -32,8 +32,8 @@ export async function captureCheckoutController(fastify: FastifyInstance) {
     },
     handler: async (req, reply) => {
       const token = await reply.generateCsrf();
-      const querystring = req.query as { token: string };
-      const orderDetails = await getOrder({ orderID: querystring.token });
+      const { token: orderID } = req.query as { token: string };
+      const orderDetails = await getOrder({ orderID });
 
       return reply.view("/src/templates/capture-checkout.ejs", {
         token,
@@ -57,8 +57,8 @@ export async function completeCheckoutController(fastify: FastifyInstance) {
       },
     },
     handler: async (req, reply) => {
-      const querystring = req.query as { token: string };
-      const orderDetails = await getOrder({ orderID: querystring.token });
+      const { token: orderID } = req.query as { token: string };
+      const orderDetails = await getOrder({ orderID });
 
       return reply.view("/src/templates/complete-checkout.ejs", {
         orderDetails,
@@ -81,11 +81,36 @@ export async function cancelCheckoutController(fastify: FastifyInstance) {
       },
     },
     handler: async (req, reply) => {
-      const querystring = req.query as { token: string };
-      const orderDetails = await getOrder({ orderID: querystring.token });
+      const { token: orderID } = req.query as { token: string };
+      const orderDetails = await getOrder({ orderID });
 
       return reply.view("/src/templates/cancel-checkout.ejs", {
         orderDetails,
+      });
+    },
+  });
+}
+
+export async function createOrderFailureController(fastify: FastifyInstance) {
+  fastify.route({
+    method: "GET",
+    url: "/create-order-failed",
+    schema: {
+      querystring: {
+        type: "object",
+        required: ["error-details"],
+        properties: {
+          "error-details": { type: "string" },
+        },
+      },
+    },
+    handler: async (req, reply) => {
+      const { "error-details": errorDetails } = req.query as {
+        "error-details": string;
+      };
+
+      return reply.view("/src/templates/create-order-failed.ejs", {
+        errorDetails: JSON.parse(errorDetails),
       });
     },
   });

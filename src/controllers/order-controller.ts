@@ -9,6 +9,7 @@ import type {
   OrderResponseBody,
   PurchaseItem,
 } from "@paypal/paypal-js";
+import { OrderErrorResponse } from "../order/order";
 
 const currency = "USD";
 const intent = "CAPTURE";
@@ -138,6 +139,13 @@ async function createOrderHandler(
     reply.redirect(redirectLink!.href);
   }
 
+  const orderErrorResponse = orderResponse.data as OrderErrorResponse;
+
+  reply.redirect(
+    `/app/create-order-failed?error-details=${JSON.stringify(
+      orderErrorResponse.details
+    )}`
+  );
   request.log.error(orderResponse.data, "failed to create order");
   // TODO: redirect to error page
 }
