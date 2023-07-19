@@ -11,7 +11,7 @@
     "test": "tap --ts --no-check-coverage",
     "coverage": "npm test -- --coverage-report=html",
     "build": "rimraf dist && tsc",
-    "validate": "npm run check-node-version && prettier --check . && npm run lint && tsc --noEmit && npm run coverage:ci",
+    "validate": "npm run check-node-version && prettier --check . && npm run lint && tsc --noEmit && npm run coverage",
     "start": "NODE_ENV=production node dist/server.js"
   },
   "keywords": [],
@@ -22,7 +22,7 @@
     "@fastify/csrf-protection": "^6.3.0",
     "@fastify/formbody": "^7.4.0",
     "@fastify/view": "^7.4.1",
-    "@paypal/paypal-js": "^5.1.5",
+    "@paypal/paypal-js": "^6.0.1",
     "dotenv": "^16.0.3",
     "ejs": "^3.1.9",
     "fastify": "^4.15.0",
