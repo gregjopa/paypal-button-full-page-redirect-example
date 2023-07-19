@@ -73,19 +73,7 @@ async function createOrderHandler(
   const taxTotal = roundTwoDecimals(itemTotal * 0.05);
   const grandTotal = roundTwoDecimals(itemTotal + shippingTotal + taxTotal);
 
-  type CreateOrderRequestBodyWithPaymentSource = CreateOrderRequestBody & {
-    payment_source: {
-      paypal: {
-        experience_context: {
-          user_action: "CONTINUE" | "PAY_NOW";
-          return_url: string;
-          cancel_url: string;
-        };
-      };
-    };
-  };
-
-  const orderPayload: CreateOrderRequestBodyWithPaymentSource = {
+  const orderPayload: CreateOrderRequestBody = {
     // API reference: https://developer.paypal.com/docs/api/orders/v2/#orders_create
     intent: intent,
     purchase_units: [
@@ -136,6 +124,7 @@ async function createOrderHandler(
     const redirectLink = orderResponse.data.links.find(({ rel, method }) => {
       return rel === "payer-action" && method === "GET";
     });
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     reply.redirect(redirectLink!.href);
   }
 
